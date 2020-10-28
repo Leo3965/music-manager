@@ -14,16 +14,32 @@ public class LoginUi {
     private JLabel passwordLabel;
     private JPasswordField passwordField;
     private JButton loginButton;
+    private JButton registerButton;
     private UserInteractors interactor;
+    private UiHandler handler;
 
-    public LoginUi(UserInteractors interactor) {
+    public LoginUi(UserInteractors interactor, Boolean visible, UiHandler handler) {
         this.interactor = interactor;
+        this.handler = handler;
         this.startUserLabel();
         this.startUserField();
         this.startPasswordLabel();
         this.startPasswordField();
         this.startLoginButton();
-        this.startMainFrame();
+        this.startRegisterButton();
+        this.startMainFrame(visible);
+    }
+
+    private void startRegisterButton() {
+        this.registerButton = new JButton("Register");
+        this.registerButton.setBounds(10, 155, 200, 30);
+
+        this.registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handler.showWindow("register");
+            }
+        });
     }
 
     private void startPasswordLabel() {
@@ -36,16 +52,17 @@ public class LoginUi {
         this.emailLabel.setBounds(10, 10, 200, 30);
     }
 
-    private void startMainFrame() {
+    private void startMainFrame(Boolean visible) {
         this.mainFrame = new JFrame("System Login");
         this.mainFrame.add(this.emailLabel);
         this.mainFrame.add(this.emailField);
         this.mainFrame.add(this.passwordLabel);
         this.mainFrame.add(this.passwordField);
+        this.mainFrame.add(this.registerButton);
         this.mainFrame.add(this.loginButton);
-        this.mainFrame.setSize(220, 200);
+        this.mainFrame.setSize(220, 230);
         this.mainFrame.setLayout(null);
-        this.mainFrame.setVisible(true);
+        this.mainFrame.setVisible(visible);
 
         this.mainFrame.addWindowListener(new WindowAdapter() {
             @Override
@@ -88,5 +105,13 @@ public class LoginUi {
 
     public void close() {
         this.mainFrame.dispose();
+    }
+
+    public void hide() {
+        this.mainFrame.hide();
+    }
+
+    public void show() {
+        this.mainFrame.show();
     }
 }

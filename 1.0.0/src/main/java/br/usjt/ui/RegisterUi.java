@@ -17,9 +17,11 @@ public class RegisterUi {
     private JPasswordField passwordField;
     private JButton loginButton;
     private UserInteractors interactor;
+    private UiHandler handler;
 
-    public RegisterUi(UserInteractors interactor) {
+    public RegisterUi(UserInteractors interactor, Boolean visible, UiHandler handler) {
         this.interactor = interactor;
+        this.handler = handler;
         this.startEmailLabel();
         this.startEmailField();
         this.startPasswordLabel();
@@ -27,7 +29,7 @@ public class RegisterUi {
         this.startNameLabel();
         this.startNameField();
         this.startLoginButton();
-        this.startMainFrame();
+        this.startMainFrame(visible);
     }
 
     private void startNameLabel() {
@@ -60,7 +62,7 @@ public class RegisterUi {
         this.passwordField.setBounds(10, 135, 200, 30);
     }
 
-    private void startMainFrame() {
+    private void startMainFrame(Boolean visible) {
         this.mainFrame = new JFrame("Cadastro");
         this.mainFrame.add(this.emailLabel);
         this.mainFrame.add(this.emailField);
@@ -71,13 +73,13 @@ public class RegisterUi {
         this.mainFrame.add(this.nameLabel);
         this.mainFrame.setSize(220, 250);
         this.mainFrame.setLayout(null);
-        this.mainFrame.setVisible(true);
+        this.mainFrame.setVisible(visible);
 
         this.mainFrame.addWindowListener(new WindowAdapter() {
             @Override
 
             public void windowClosing(WindowEvent windowEvent) {
-                System.exit(0);
+                handler.showWindow("login");
             }
         });
     }
@@ -99,6 +101,10 @@ public class RegisterUi {
                     try {
                         interactor.create(name, email, password);
                         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+                        emailField.setText("");
+                        passwordField.setText("");
+                        nameField.setText("");
+                        handler.showWindow("login");
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         JOptionPane.showMessageDialog(null, "Falha no cadastro");
@@ -110,5 +116,13 @@ public class RegisterUi {
 
     public void close() {
         this.mainFrame.dispose();
+    }
+
+    public void hide() {
+        this.mainFrame.hide();
+    }
+
+    public void show() {
+        this.mainFrame.show();
     }
 }
