@@ -16,6 +16,6 @@ public class GenreInteractors {
     }
 
     public List<Genre> getGenresByUser(User user) {
-        return new ArrayList<Genre>();
+        return this.genreRepository.getByUser(user);
     }
 }

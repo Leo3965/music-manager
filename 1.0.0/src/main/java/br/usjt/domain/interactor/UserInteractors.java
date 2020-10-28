@@ -1,5 +1,7 @@
 package br.usjt.domain.interactor;
 
+import java.util.List;
+
 import br.usjt.domain.contracts.Hash;
 import br.usjt.domain.contracts.repositories.UserRepository;
 import br.usjt.domain.entity.User;
@@ -19,7 +21,7 @@ public class UserInteractors {
     }
 
     public boolean authenticate(String name, String password) {
-        User user = this.userRepository.getByKey("name", name);
-        return user.authenticate(password, this.hashDriver);
+        List<User> user = this.userRepository.getByKey("name", name);
+        return user.get(0).authenticate(password, this.hashDriver);
     }
 }
