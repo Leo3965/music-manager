@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import br.usjt.domain.contracts.repositories.UserRepository;
 import br.usjt.domain.entity.User;
 
@@ -12,7 +14,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     private EntityManager em;
 
-    UserRepositoryImpl(EntityManager em) {
+    public UserRepositoryImpl(EntityManager em) {
         this.em = em;
     }
 
@@ -25,8 +27,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     public List<User> getByKey(String key, String value) {
-        TypedQuery<User> q = em.createQuery("SELECT b FROM Book b WHERE b." + key + " = :value", User.class);
-        q.setParameter("value", value);
-        return q.getResultList();
+        CriteriaBuilder criteriaBuilder = this.em.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get(key), value));
+        TypedQuery<User> query = this.em.createQuery(criteriaQuery);
+        return query.getResultList();
     }
 }

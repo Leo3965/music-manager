@@ -12,8 +12,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import br.usjt.domain.contracts.Hash;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "users")
 public class User {
@@ -27,16 +29,22 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "email", nullable = false)
+    private String email;
+
     @OneToMany
     @JoinColumn(name = "userId")
     private List<Avaliation> avaliations;
 
-    public User(String name, String password) {
-        this.name = name;
-        this.password = password;
-    }
-
     public boolean authenticate(String password, Hash hashDriver) {
         return hashDriver.compare(this.password, password);
+    }
+
+    public static User fromRaw(String name, String email, String password) {
+        User user = new User();
+        user.name = name;
+        user.password = password;
+        user.email = email;
+        return user;
     }
 }

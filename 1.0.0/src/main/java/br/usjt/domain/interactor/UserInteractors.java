@@ -15,8 +15,8 @@ public class UserInteractors {
         this.hashDriver = hashDriver;
     }
 
-    public void create(String name, String password) {
-        User user = new User(name, this.hashDriver.hash(password));
+    public void create(String name, String email, String password) {
+        User user = User.fromRaw(name, email, this.hashDriver.hash(password));
         this.userRepository.create(user);
     }
 

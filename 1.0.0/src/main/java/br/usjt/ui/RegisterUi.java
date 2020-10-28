@@ -6,7 +6,7 @@ import br.usjt.domain.interactor.UserInteractors;
 
 import java.awt.event.*;
 
-public class LoginUi {
+public class RegisterUi {
 
     private JFrame mainFrame;
     private JLabel emailLabel;
@@ -16,8 +16,7 @@ public class LoginUi {
     private JButton loginButton;
     private UserInteractors interactor;
 
-    public LoginUi(UserInteractors interactor) {
-        this.interactor = interactor;
+    public RegisterUi() {
         this.startUserLabel();
         this.startUserField();
         this.startPasswordLabel();

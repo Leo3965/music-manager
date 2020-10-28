@@ -1,7 +1,9 @@
 package br.usjt.utils;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import javax.persistence.EntityManager;
 
 public class HibernateUtil {
     private static final SessionFactory SESSION_FACTORY = buildSessionFactory();
@@ -21,5 +23,14 @@ public class HibernateUtil {
 
     public static void shutdown() {
         getSessionFactory().close();
+    }
+
+    public static EntityManager getEntityManager() {
+        try (Session session = getSessionFactory().openSession()) {
+            return session.getEntityManagerFactory().createEntityManager();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
