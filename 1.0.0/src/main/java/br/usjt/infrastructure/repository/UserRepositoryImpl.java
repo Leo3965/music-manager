@@ -19,11 +19,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     public void create(User data) {
+        em.getTransaction().begin();
         if (data.getId() == null) {
             em.persist(data);
         } else {
             em.merge(data);
         }
+        em.getTransaction().commit();
     }
 
     public List<User> getByKey(String key, String value) {

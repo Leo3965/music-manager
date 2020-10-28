@@ -20,8 +20,8 @@ public class UserInteractors {
         this.userRepository.create(user);
     }
 
-    public boolean authenticate(String name, String password) {
-        List<User> user = this.userRepository.getByKey("name", name);
+    public boolean authenticate(String email, String password) {
+        List<User> user = this.userRepository.getByKey("email", email);
         return user.get(0).authenticate(password, this.hashDriver);
     }
 }
