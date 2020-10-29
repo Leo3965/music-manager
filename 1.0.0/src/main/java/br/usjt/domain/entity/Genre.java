@@ -27,11 +27,20 @@ public class Genre {
     @JoinTable(name = "music_genres", joinColumns = @JoinColumn(name = "genreId"), inverseJoinColumns = @JoinColumn(name = "musicId"))
     private List<Music> musics;
 
+    @ManyToMany
+    @JoinTable(name = "user_genres", joinColumns = @JoinColumn(name = "genreId"), inverseJoinColumns = @JoinColumn(name = "userId"))
+    private List<User> users;
+
     public Genre() {
         this.musics = new ArrayList<Music>();
     }
 
     public void addMusic(Music music) {
         this.musics.add(music);
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

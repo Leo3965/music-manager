@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import br.usjt.domain.contracts.Hash;
@@ -35,6 +36,9 @@ public class User {
     @OneToMany
     @JoinColumn(name = "userId")
     private List<Avaliation> avaliations;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Genre> genres;
 
     public boolean authenticate(String password, Hash hashDriver) {
         return hashDriver.compare(this.password, password);

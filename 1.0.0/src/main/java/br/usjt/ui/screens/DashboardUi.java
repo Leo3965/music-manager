@@ -58,7 +58,7 @@ public class DashboardUi extends BaseUi {
         this.myGenresButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "favoriteGenre");
+                handler.showWindow("genres");
             }
         });
     }
