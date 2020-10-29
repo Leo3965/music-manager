@@ -1,14 +1,15 @@
-package br.usjt.ui;
+package br.usjt.ui.screens;
 
 import javax.swing.*;
 
 import br.usjt.domain.interactor.UserInteractors;
+import br.usjt.ui.BaseUi;
+import br.usjt.ui.UiHandler;
 
 import java.awt.event.*;
 
-public class RegisterUi {
+public class RegisterUi extends BaseUi {
 
-    private JFrame mainFrame;
     private JLabel nameLabel;
     private JTextField nameField;
     private JLabel emailLabel;
@@ -62,7 +63,7 @@ public class RegisterUi {
         this.passwordField.setBounds(10, 135, 200, 30);
     }
 
-    private void startMainFrame(Boolean visible) {
+    protected void startMainFrame(Boolean visible) {
         this.mainFrame = new JFrame("Cadastro");
         this.mainFrame.add(this.emailLabel);
         this.mainFrame.add(this.emailField);
@@ -74,6 +75,7 @@ public class RegisterUi {
         this.mainFrame.setSize(220, 250);
         this.mainFrame.setLayout(null);
         this.mainFrame.setVisible(visible);
+        this.centralize();
 
         this.mainFrame.addWindowListener(new WindowAdapter() {
             @Override
@@ -112,17 +114,5 @@ public class RegisterUi {
                 }
             }
         });
-    }
-
-    public void close() {
-        this.mainFrame.dispose();
-    }
-
-    public void hide() {
-        this.mainFrame.hide();
-    }
-
-    public void show() {
-        this.mainFrame.show();
     }
 }

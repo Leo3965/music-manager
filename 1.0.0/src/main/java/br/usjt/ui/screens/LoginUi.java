@@ -1,14 +1,14 @@
-package br.usjt.ui;
+package br.usjt.ui.screens;
 
 import javax.swing.*;
 
 import br.usjt.domain.interactor.UserInteractors;
+import br.usjt.ui.BaseUi;
+import br.usjt.ui.UiHandler;
 
 import java.awt.event.*;
 
-public class LoginUi {
-
-    private JFrame mainFrame;
+public class LoginUi extends BaseUi {
     private JLabel emailLabel;
     private JTextField emailField;
     private JLabel passwordLabel;
@@ -52,7 +52,7 @@ public class LoginUi {
         this.emailLabel.setBounds(10, 10, 200, 30);
     }
 
-    private void startMainFrame(Boolean visible) {
+    protected void startMainFrame(Boolean visible) {
         this.mainFrame = new JFrame("System Login");
         this.mainFrame.add(this.emailLabel);
         this.mainFrame.add(this.emailField);
@@ -63,6 +63,7 @@ public class LoginUi {
         this.mainFrame.setSize(220, 230);
         this.mainFrame.setLayout(null);
         this.mainFrame.setVisible(visible);
+        this.centralize();
 
         this.mainFrame.addWindowListener(new WindowAdapter() {
             @Override
@@ -85,9 +86,9 @@ public class LoginUi {
                 if (username.equals("") || password.equals("")) {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha os campos");
                 } else if (interactor.authenticate(username, password)) {
-                    JOptionPane.showMessageDialog(null, "Successfully authenticated");
+                    handler.showWindow("dashboard");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Authentication failure");
+                    JOptionPane.showMessageDialog(null, "Falha de autenticação");
                 }
             }
         });
@@ -101,17 +102,5 @@ public class LoginUi {
     private void startUserField() {
         this.emailField = new JTextField();
         this.emailField.setBounds(10, 35, 200, 30);
-    }
-
-    public void close() {
-        this.mainFrame.dispose();
-    }
-
-    public void hide() {
-        this.mainFrame.hide();
-    }
-
-    public void show() {
-        this.mainFrame.show();
     }
 }

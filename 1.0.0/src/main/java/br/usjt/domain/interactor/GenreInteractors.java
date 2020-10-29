@@ -3,8 +3,6 @@ package br.usjt.domain.interactor;
 import br.usjt.domain.contracts.repositories.GenreRepository;
 import br.usjt.domain.entity.Genre;
 import br.usjt.domain.entity.User;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class GenreInteractors {
