@@ -20,4 +20,8 @@ public class GenreInteractors {
     public List<Genre> getAll() {
         return this.genreRepository.getAll();
     }
+
+    public List<Genre> getByKey(String key, String value) {
+        return this.genreRepository.getByKey(key, value);
+    }
 }

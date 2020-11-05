@@ -27,8 +27,7 @@ public class Genre {
     @JoinTable(name = "music_genres", joinColumns = @JoinColumn(name = "genreId"), inverseJoinColumns = @JoinColumn(name = "musicId"))
     private List<Music> musics;
 
-    @ManyToMany
-    @JoinTable(name = "user_genres", joinColumns = @JoinColumn(name = "genreId"), inverseJoinColumns = @JoinColumn(name = "userId"))
+    @ManyToMany(mappedBy = "genres")
     private List<User> users;
 
     public Genre() {

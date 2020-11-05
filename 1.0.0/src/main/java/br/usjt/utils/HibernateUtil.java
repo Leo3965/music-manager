@@ -33,4 +33,13 @@ public class HibernateUtil {
             return null;
         }
     }
+
+    public static Session getSession() {
+        try {
+            return getSessionFactory().openSession();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -2,12 +2,15 @@ package br.usjt.domain.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -37,7 +40,8 @@ public class User {
     @JoinColumn(name = "userId")
     private List<Avaliation> avaliations;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_genres", joinColumns = @JoinColumn(name = "genreId"), inverseJoinColumns = @JoinColumn(name = "userId"))
     private List<Genre> genres;
 
     public boolean authenticate(String password, Hash hashDriver) {
@@ -50,5 +54,9 @@ public class User {
         user.password = password;
         user.email = email;
         return user;
+    }
+
+    public void addGenre(Genre genre) {
+        this.genres.add(genre);
     }
 }

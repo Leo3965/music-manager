@@ -2,6 +2,7 @@ package br.usjt.ui.screens;
 
 import javax.swing.*;
 
+import br.usjt.domain.entity.User;
 import br.usjt.domain.interactor.UserInteractors;
 import br.usjt.ui.BaseUi;
 import br.usjt.ui.UiHandler;
@@ -86,6 +87,8 @@ public class LoginUi extends BaseUi {
                 if (username.equals("") || password.equals("")) {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha os campos");
                 } else if (interactor.authenticate(username, password)) {
+                    User user = interactor.getUserByEmail(username);
+                    handler.setUser(user);
                     handler.showWindow("dashboard");
                 } else {
                     JOptionPane.showMessageDialog(null, "Falha de autenticação");

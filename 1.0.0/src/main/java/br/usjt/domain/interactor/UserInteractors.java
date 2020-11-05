@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.usjt.domain.contracts.Hash;
 import br.usjt.domain.contracts.repositories.UserRepository;
+import br.usjt.domain.entity.Genre;
 import br.usjt.domain.entity.User;
 
 public class UserInteractors {
@@ -22,6 +23,19 @@ public class UserInteractors {
 
     public boolean authenticate(String email, String password) {
         List<User> user = this.userRepository.getByKey("email", email);
-        return user.get(0).authenticate(password, this.hashDriver);
+        if (user.size() > 0) {
+            return user.get(0).authenticate(password, this.hashDriver);
+        } else {
+            return false;
+        }
+    }
+
+    public User getUserByEmail(String email) {
+        return this.userRepository.getByKey("email", email).get(0);
+    }
+
+    public void addFavoriteGenre(User user, Genre genre) {
+        user.addGenre(genre);
+        this.userRepository.update(user);
     }
 }

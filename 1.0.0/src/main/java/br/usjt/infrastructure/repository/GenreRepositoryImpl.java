@@ -48,4 +48,10 @@ public class GenreRepositoryImpl implements GenreRepository {
         return allQuery.getResultList();
     }
 
+    @Override
+    public void update(Genre data) {
+        // TODO Auto-generated method stub
+
+    }
+
 }
