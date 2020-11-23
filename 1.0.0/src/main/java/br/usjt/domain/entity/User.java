@@ -35,10 +35,14 @@ public class User {
     }
 
     public void addGenre(Genre genre) {
-        this.genres.add(genre);
+        if(!this.genres.contains(genre)) {
+            this.genres.add(genre);
+        }
     }
 
     public void addAvaliation(Avaliation avaliation) {
-        this.avaliations.add(avaliation);
+        if(!this.avaliations.contains(avaliation)) {
+            this.avaliations.add(avaliation);
+        }
     }
 }

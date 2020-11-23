@@ -19,7 +19,7 @@ public class MysqlDriver {
     }
 
 	public Connection getConnection() throws Exception {
-		String url = String.format("jdbc:mysql://%s:%s/%s?useTimezone=true&serverTimezone=America/Sao_Paulo", host,
+		String url = String.format("jdbc:mysql://%s:%s/%s", host,
 				port, db);
 		return DriverManager.getConnection(url, user, pass);
 	}

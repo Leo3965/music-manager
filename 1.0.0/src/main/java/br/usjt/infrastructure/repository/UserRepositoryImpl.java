@@ -128,7 +128,7 @@ public class UserRepositoryImpl implements UserRepository {
                 e.printStackTrace();
             }
 
-            String sqlDeleteAvaliation = "DELETE FROM avaliatoins where userId = ?";
+            String sqlDeleteAvaliation = "DELETE FROM avaliations where userId = ?";
 
             try (PreparedStatement psDeleteAvaliation = conn.prepareStatement(sqlDeleteAvaliation)) {
                 psDeleteAvaliation.setInt(1, user.getId());

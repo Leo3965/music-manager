@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  db:
+    container_name: usjt-music-manager
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    volumes:
+      - /var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=music_manager
+      - MYSQL_ROOT_PASSWORD=secret
