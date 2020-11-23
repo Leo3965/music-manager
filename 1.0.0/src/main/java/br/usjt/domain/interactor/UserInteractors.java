@@ -22,12 +22,8 @@ public class UserInteractors {
     }
 
     public boolean authenticate(String email, String password) {
-        List<User> user = this.userRepository.getByKey("email", email);
-        if (user.size() > 0) {
-            return user.get(0).authenticate(password, this.hashDriver);
-        } else {
-            return false;
-        }
+        User user = this.getUserByEmail(email);
+        return user.authenticate(password, this.hashDriver);
     }
 
     public User getUserByEmail(String email) {

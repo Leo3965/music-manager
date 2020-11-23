@@ -1,5 +1,6 @@
 package br.usjt.domain.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.usjt.domain.contracts.Hash;
@@ -20,12 +21,17 @@ public class User {
         return hashDriver.compare(this.password, password);
     }
 
+    public User(Integer id, String name, String password, String email) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.avaliations = new ArrayList<Avaliation>();
+        this.genres = new ArrayList<Genre>();
+    }
+
     public static User fromRaw(String name, String email, String password) {
-        User user = new User();
-        user.name = name;
-        user.password = password;
-        user.email = email;
-        return user;
+        return new User(-1, name, password, email);
     }
 
     public void addGenre(Genre genre) {
