@@ -35,23 +35,6 @@
 			<version>1.18.16</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate.orm</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>6.0.0.Alpha6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>6.0.0.Alpha6</version>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>org.easymock</groupId>
-			<artifactId>easymock</artifactId>
-			<version>3.2</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
