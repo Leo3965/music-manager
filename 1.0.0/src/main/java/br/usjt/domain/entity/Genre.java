@@ -16,6 +16,7 @@ public class Genre {
         this.id = id;
         this.name = name;
         this.musics = new ArrayList<Music>();
+        this.users = new ArrayList<User>();
     }
 
     public void addMusic(Music music) {

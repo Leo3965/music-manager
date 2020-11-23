@@ -8,4 +8,8 @@ public class Avaliation {
     private Short score;
     private User user;
     private Music music;
+
+    public Avaliation(Integer id, Short score) {
+        
+    }
 }

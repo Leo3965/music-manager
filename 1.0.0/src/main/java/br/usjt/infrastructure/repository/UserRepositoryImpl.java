@@ -32,12 +32,50 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
 
+    private List<Avaliation> getAvaliationsByUser(User user) {
+        String sql = "SELECT * FROM avaliations where userId = (?)";
+
+        try (Connection conn = this.driver.getConnection(); PreparedStatement psQueryUser = conn.prepareStatement(sql);) {
+            psQueryUser.setInt(1, user.getId());
+            ResultSet rs = psQueryUser.executeQuery();
+            List<Avaliation> avaliations = new ArrayList<Avaliation>();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                Short score = rs.getShort("score");
+                avaliations.add(new Avaliation(id, score));
+            }
+            return avaliations;
+        } catch (Exception e) {
+            return new ArrayList<Avaliation>();
+        }
+    }
+
+    private List<Genre> getGenresByUser(User user) {
+        String sql = "SELECT * FROM genres INNER JOIN user_genres ON user_genres.genreId = genres.id WHERE userId = (?)";
+
+        try (Connection conn = this.driver.getConnection(); PreparedStatement psQueryUser = conn.prepareStatement(sql);) {
+            psQueryUser.setInt(1, user.getId());
+            ResultSet rs = psQueryUser.executeQuery();
+            List<Genre> genres = new ArrayList<Genre>();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                genres.add(new Genre(id, name));
+            }
+            return genres;
+        } catch (Exception e) {
+            return new ArrayList<Genre>();
+        }
+    }
+
     public List<User> getByKey(String key, String value) {
         String sql = String.format("SELECT * FROM users where %s = (?)", key);
 
-        try (Connection conn = this.driver.getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
-            ps.setString(1, value);
-            ResultSet rs = ps.executeQuery();
+        try (Connection conn = this.driver.getConnection(); PreparedStatement psQueryUser = conn.prepareStatement(sql);) {
+            psQueryUser.setString(1, value);
+            ResultSet rs = psQueryUser.executeQuery();
             List<User> users = new ArrayList<User>();
 
             while (rs.next()) {
@@ -45,7 +83,14 @@ public class UserRepositoryImpl implements UserRepository {
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
-                users.add(new User(id, name, password, email));
+                User fetchedUser = new User(id, name, password, email);
+                for(Avaliation avaliation: this.getAvaliationsByUser(fetchedUser)) {
+                    fetchedUser.addAvaliation(avaliation);
+                }
+                for(Genre genre: this.getGenresByUser(fetchedUser)) {
+                    fetchedUser.addGenre(genre);
+                }
+                users.add(fetchedUser);
             }
             return users;
         } catch (Exception e) {

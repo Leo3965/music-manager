@@ -37,4 +37,8 @@ public class User {
     public void addGenre(Genre genre) {
         this.genres.add(genre);
     }
+
+    public void addAvaliation(Avaliation avaliation) {
+        this.avaliations.add(avaliation);
+    }
 }
