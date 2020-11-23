@@ -2,6 +2,9 @@ package br.usjt.domain.entity;
 
 import java.util.List;
 
+import lombok.Getter;
+
+@Getter
 public class Music {
     private Integer id;
 

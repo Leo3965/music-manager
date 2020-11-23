@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.usjt.domain.contracts.repositories.UserRepository;
+import br.usjt.domain.entity.Avaliation;
 import br.usjt.domain.entity.Genre;
 import br.usjt.domain.entity.User;
 import br.usjt.infrastructure.drivers.MysqlDriver;
@@ -37,16 +38,16 @@ public class UserRepositoryImpl implements UserRepository {
         try (Connection conn = this.driver.getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
             ps.setString(1, value);
             ResultSet rs = ps.executeQuery();
-            List<User> genres = new ArrayList<User>();
+            List<User> users = new ArrayList<User>();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
-                genres.add(new User(id, name, password, email));
+                users.add(new User(id, name, password, email));
             }
-            return genres;
+            return users;
         } catch (Exception e) {
             return new ArrayList<User>();
         }
@@ -74,6 +75,26 @@ public class UserRepositoryImpl implements UserRepository {
                         psInsertGenre.setInt(1, genre.getId());
                         psInsertGenre.setInt(2, user.getId());
                         psInsertGenre.execute();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            String sqlDeleteAvaliation = "DELETE FROM avaliatoins where userId = ?";
+
+            try (PreparedStatement psDeleteAvaliation = conn.prepareStatement(sqlDeleteAvaliation)) {
+                psDeleteAvaliation.setInt(1, user.getId());
+                psDeleteAvaliation.execute();
+                for(Avaliation avaliation : user.getAvaliations()) {
+                    String sqlInsertAvaliation = "INSERT INTO avaliations (score, musicId, userId) values (?, ?, ?)";
+
+                    try (PreparedStatement psInsertAvaliation = conn.prepareStatement(sqlInsertAvaliation)) {
+                        psInsertAvaliation.setInt(1, avaliation.getId());
+                        psInsertAvaliation.setInt(2, avaliation.getMusic().getId());
+                        psInsertAvaliation.setInt(3, user.getId());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

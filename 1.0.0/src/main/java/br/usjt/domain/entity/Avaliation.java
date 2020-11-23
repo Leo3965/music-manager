@@ -1,4 +1,8 @@
 package br.usjt.domain.entity;
+
+import lombok.Getter;
+
+@Getter
 public class Avaliation {
     private Integer id;
     private Short score;
