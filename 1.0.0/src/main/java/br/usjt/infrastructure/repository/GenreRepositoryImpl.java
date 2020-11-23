@@ -49,7 +49,22 @@ public class GenreRepositoryImpl implements GenreRepository {
     }
 
     public List<Genre> getByUser(User user) {
-        return new ArrayList<Genre>();
+        String sql = "SELECT * FROM genres INNER JOIN user_genres on user_genres.genreId = genres.Id where user_genres.userId = (?)";
+
+        try (Connection conn = this.driver.getConnection(); PreparedStatement ps = conn.prepareStatement(sql);) {
+            ps.setInt(1, user.getId());
+            ResultSet rs = ps.executeQuery();
+            List<Genre> genres = new ArrayList<Genre>();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                genres.add(new Genre(id, name));
+            }
+            return genres;
+        } catch (Exception e) {
+            return new ArrayList<Genre>();
+        }
     }
 
     public List<Genre> getAll() {

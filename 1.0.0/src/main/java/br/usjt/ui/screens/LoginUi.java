@@ -54,19 +54,19 @@ public class LoginUi extends BaseUi {
     }
 
     protected void startMainFrame(Boolean visible) {
-        this.mainFrame = new JFrame("System Login");
-        this.mainFrame.add(this.emailLabel);
-        this.mainFrame.add(this.emailField);
-        this.mainFrame.add(this.passwordLabel);
-        this.mainFrame.add(this.passwordField);
-        this.mainFrame.add(this.registerButton);
-        this.mainFrame.add(this.loginButton);
-        this.mainFrame.setSize(220, 230);
-        this.mainFrame.setLayout(null);
-        this.mainFrame.setVisible(visible);
+        this.setTitle("System Login");
+        this.add(this.emailLabel);
+        this.add(this.emailField);
+        this.add(this.passwordLabel);
+        this.add(this.passwordField);
+        this.add(this.registerButton);
+        this.add(this.loginButton);
+        this.setSize(220, 230);
+        this.setLayout(null);
+        this.setVisible(visible);
         this.centralize();
 
-        this.mainFrame.addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);

@@ -8,11 +8,6 @@ import br.usjt.factories.domain.UserInteractorFactory;
 import br.usjt.ui.screens.*;
 
 public class UiHandler {
-
-    private LoginUi login;
-    private RegisterUi register;
-    private DashboardUi dashboard;
-    private GenresUi genres;
     private User user;
 
     private HashMap<String, BaseUi> screens;

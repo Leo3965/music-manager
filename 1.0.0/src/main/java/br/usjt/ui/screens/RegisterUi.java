@@ -64,20 +64,20 @@ public class RegisterUi extends BaseUi {
     }
 
     protected void startMainFrame(Boolean visible) {
-        this.mainFrame = new JFrame("Cadastro");
-        this.mainFrame.add(this.emailLabel);
-        this.mainFrame.add(this.emailField);
-        this.mainFrame.add(this.passwordLabel);
-        this.mainFrame.add(this.passwordField);
-        this.mainFrame.add(this.loginButton);
-        this.mainFrame.add(this.nameField);
-        this.mainFrame.add(this.nameLabel);
-        this.mainFrame.setSize(220, 250);
-        this.mainFrame.setLayout(null);
-        this.mainFrame.setVisible(visible);
+        this.setTitle("Cadastro");
+        this.add(this.emailLabel);
+        this.add(this.emailField);
+        this.add(this.passwordLabel);
+        this.add(this.passwordField);
+        this.add(this.loginButton);
+        this.add(this.nameField);
+        this.add(this.nameLabel);
+        this.setSize(220, 250);
+        this.setLayout(null);
+        this.setVisible(visible);
         this.centralize();
 
-        this.mainFrame.addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
 
             public void windowClosing(WindowEvent windowEvent) {

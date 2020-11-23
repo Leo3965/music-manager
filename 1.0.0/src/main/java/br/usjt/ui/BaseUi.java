@@ -1,25 +1,18 @@
 package br.usjt.ui;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public abstract class BaseUi {
-    protected JFrame mainFrame;
-
+public abstract class BaseUi extends JFrame {
+    protected JPanel backgroundPanel;
+    
     abstract protected void startMainFrame(Boolean visible);
 
-    public void hide() {
-        this.mainFrame.hide();
-    }
-
-    public void show() {
-        this.mainFrame.show();
-    }
-
     protected void close() {
-        this.mainFrame.dispose();
+        this.dispose();
     }
 
     protected void centralize() {
-        this.mainFrame.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
     }
 }

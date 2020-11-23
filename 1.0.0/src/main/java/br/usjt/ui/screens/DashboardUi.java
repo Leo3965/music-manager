@@ -1,7 +1,6 @@
 package br.usjt.ui.screens;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import br.usjt.ui.BaseUi;
@@ -64,16 +63,16 @@ public class DashboardUi extends BaseUi {
     }
 
     protected void startMainFrame(Boolean visible) {
-        this.mainFrame = new JFrame("Dashboard");
-        this.mainFrame.add(this.myGenresButton);
-        this.mainFrame.add(this.scoreMusicButton);
-        this.mainFrame.add(this.getRecommendationButton);
-        this.mainFrame.setSize(400, 200);
-        this.mainFrame.setLayout(null);
-        this.mainFrame.setVisible(visible);
+        this.setTitle("Dashboard");
+        this.add(this.myGenresButton);
+        this.add(this.scoreMusicButton);
+        this.add(this.getRecommendationButton);
+        this.setSize(400, 200);
+        this.setLayout(null);
+        this.setVisible(visible);
         this.centralize();
 
-        this.mainFrame.addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
                 System.exit(0);

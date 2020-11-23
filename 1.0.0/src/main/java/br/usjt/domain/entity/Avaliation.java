@@ -10,6 +10,7 @@ public class Avaliation {
     private Music music;
 
     public Avaliation(Integer id, Short score) {
-        
+        this.id = id;
+        this.score = score;
     }
 }

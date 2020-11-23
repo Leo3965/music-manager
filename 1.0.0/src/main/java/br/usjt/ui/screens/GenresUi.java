@@ -14,14 +14,19 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JInternalFrame.JDesktopIcon;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class GenresUi extends BaseUi {
 
     private UiHandler handler;
     private JButton addButton;
     private JComboBox<Genre> genreOptions;
-    // private JTable dataTable;
+    private JTable dataTable;
+    private JScrollPane scroolPanel;
     private GenreInteractors genreInteractor;
     private UserInteractors userInteractor;
 
@@ -33,12 +38,19 @@ public class GenresUi extends BaseUi {
         this.startAddButton();
         this.startDataTable();
         this.startGenreComboBox();
+        this.startScroolPanel();
         this.startMainFrame(visible);
+    }
+
+    private void startScroolPanel() {
+        this.scroolPanel = new JScrollPane(this.dataTable);
+        this.scroolPanel.setBounds(20, 20, 360, 300);
+        this.scroolPanel.setVisible(true);
     }
 
     private void startGenreComboBox() {
         this.genreOptions = new JComboBox<>();
-        this.genreOptions.setBounds(20, 10, 360, 30);
+        this.genreOptions.setBounds(20, 340, 360, 30);
 
         for (Genre genre : this.genreInteractor.getAll()) {
             this.genreOptions.addItem(genre);
@@ -46,13 +58,25 @@ public class GenresUi extends BaseUi {
     }
 
     private void startDataTable() {
-        // this.dataTable = new JTable();
-        // this.dataTable.setModel(arg0);
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Gênero");
+        model.addColumn("Data");
+        this.dataTable = new JTable(model);
+        this.dataTable.setEnabled(false);
+    }
+
+    private void load() {
+        User user = handler.getUser();
+        DefaultTableModel model = (DefaultTableModel) this.dataTable.getModel();
+        model.setRowCount(0);
+        for (Genre genre : this.genreInteractor.getGenresByUser(user)) {
+            model.addRow(new Object[] { genre.getName(), genre.getId() });
+        }
     }
 
     private void startAddButton() {
         this.addButton = new JButton("Adicionar");
-        this.addButton.setBounds(20, 55, 360, 30);
+        this.addButton.setBounds(20, 390, 360, 30);
 
         this.addButton.addActionListener(new ActionListener() {
             @Override
@@ -62,6 +86,7 @@ public class GenresUi extends BaseUi {
                 if (genre != null) {
                     User user = handler.getUser();
                     userInteractor.addFavoriteGenre(user, genre);
+                    load();
                 }
 
             }
@@ -70,18 +95,26 @@ public class GenresUi extends BaseUi {
 
     @Override
     protected void startMainFrame(Boolean visible) {
-        this.mainFrame = new JFrame("Meus gêneros preferidos");
-        this.mainFrame.add(this.genreOptions);
-        this.mainFrame.add(this.addButton);
-        this.mainFrame.setSize(400, 200);
-        this.mainFrame.setLayout(null);
-        this.mainFrame.setVisible(visible);
+        this.setTitle("Meus gêneros preferidos");
+        this.setSize(400, 490);
+        this.setVisible(visible);
+        this.add(this.scroolPanel);
         this.centralize();
+        this.add(this.genreOptions);
+        this.add(this.addButton);
+        this.setLayout(null);
 
-        this.mainFrame.addWindowListener(new WindowAdapter() {
+        this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
                 handler.showWindow("dashboard");
+            }
+        });
+
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent windowEvent) {
+                load();
             }
         });
     }
