@@ -1,28 +1,30 @@
 package br.usjt.ui;
 
 import java.util.HashMap;
-
 import br.usjt.domain.entity.User;
+import br.usjt.domain.interactor.UserInteractors;
 import br.usjt.factories.domain.GenreInteractorFactory;
 import br.usjt.factories.domain.UserInteractorFactory;
 import br.usjt.ui.screens.*;
 
 public class UiHandler {
-    private User user;
+    private String userEmail;
 
     private HashMap<String, BaseUi> screens;
+    private UserInteractors userInteractor;
 
-    public UiHandler() {
+    public UiHandler(UserInteractors userInteractor) {
         this.screens = new HashMap<String, BaseUi>();
+        this.userInteractor = userInteractor;
         startWindows();
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.userEmail = user.getEmail();
     }
 
     public User getUser() {
-        return this.user;
+        return this.userInteractor.getUserByEmail(this.userEmail);
     }
 
     private void startWindows() {

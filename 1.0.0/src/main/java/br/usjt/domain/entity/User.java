@@ -35,13 +35,29 @@ public class User {
     }
 
     public void addGenre(Genre genre) {
-        if(!this.genres.contains(genre)) {
+        Boolean exist = false;
+
+        for(Genre genrePersisted : this.genres) {
+            if(genrePersisted.getId() == genre.getId()) {
+                exist = true;
+            }
+        }
+
+        if(!exist) {
             this.genres.add(genre);
         }
     }
 
     public void addAvaliation(Avaliation avaliation) {
-        if(!this.avaliations.contains(avaliation)) {
+        Boolean exist = false;
+
+        for(Avaliation avaliationPersisted : this.avaliations) {
+            if(avaliationPersisted.getId() == avaliation.getId()) {
+                exist = true;
+            }
+        }
+
+        if(!exist) {
             this.avaliations.add(avaliation);
         }
     }
