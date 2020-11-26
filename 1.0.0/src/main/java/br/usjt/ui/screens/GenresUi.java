@@ -6,10 +6,12 @@ import br.usjt.domain.services.GenreService;
 import br.usjt.domain.services.UserService;
 import br.usjt.ui.BaseUi;
 import br.usjt.ui.UiHandler;
+import br.usjt.utils.ButtonColumn;
 
 import java.awt.event.*;
-import java.util.List;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -30,8 +32,7 @@ public class GenresUi extends BaseUi {
     private GenreService genreInteractor;
     private UserService userInteractor;
 
-    public GenresUi(GenreService genreInteractor, UserService userInteractor, Boolean visible,
-            UiHandler handler) {
+    public GenresUi(GenreService genreInteractor, UserService userInteractor, Boolean visible, UiHandler handler) {
         this.handler = handler;
         this.genreInteractor = genreInteractor;
         this.userInteractor = userInteractor;
@@ -61,8 +62,9 @@ public class GenresUi extends BaseUi {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Gênero");
         model.addColumn("Data");
+        model.addColumn("Action");
         this.dataTable = new JTable(model);
-        this.dataTable.setEnabled(false);
+        //this.dataTable.setEnabled(false);
     }
 
     private void load() {
@@ -70,8 +72,20 @@ public class GenresUi extends BaseUi {
         DefaultTableModel model = (DefaultTableModel) this.dataTable.getModel();
         model.setRowCount(0);
         for (Genre genre : this.genreInteractor.getGenresByUser(user)) {
-            model.addRow(new Object[] { genre.getName(), genre.getId() });
+            model.addRow(new Object[] { genre.getName(), genre.getId(), "Delete" });
         }
+
+        Action delete = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                /*JTable table = (JTable) e.getSource();
+                int modelRow = Integer.valueOf(e.getActionCommand());
+                ((DefaultTableModel) table.getModel()).removeRow(modelRow);*/
+                JOptionPane.showMessageDialog(null, "Delete");
+            }
+        };
+
+        ButtonColumn buttonColumn = new ButtonColumn(this.dataTable, delete, 2);
+        buttonColumn.setMnemonic(KeyEvent.VK_D);
     }
 
     private void startAddButton() {
