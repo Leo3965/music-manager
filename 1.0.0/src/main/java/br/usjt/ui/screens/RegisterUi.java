@@ -2,7 +2,7 @@ package br.usjt.ui.screens;
 
 import javax.swing.*;
 
-import br.usjt.domain.interactor.UserInteractors;
+import br.usjt.domain.services.UserService;
 import br.usjt.ui.BaseUi;
 import br.usjt.ui.UiHandler;
 
@@ -17,10 +17,10 @@ public class RegisterUi extends BaseUi {
     private JLabel passwordLabel;
     private JPasswordField passwordField;
     private JButton loginButton;
-    private UserInteractors interactor;
+    private UserService interactor;
     private UiHandler handler;
 
-    public RegisterUi(UserInteractors interactor, Boolean visible, UiHandler handler) {
+    public RegisterUi(UserService interactor, Boolean visible, UiHandler handler) {
         this.interactor = interactor;
         this.handler = handler;
         this.startEmailLabel();

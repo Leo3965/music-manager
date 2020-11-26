@@ -2,8 +2,8 @@ package br.usjt.ui.screens;
 
 import br.usjt.domain.entity.Genre;
 import br.usjt.domain.entity.User;
-import br.usjt.domain.interactor.GenreInteractors;
-import br.usjt.domain.interactor.UserInteractors;
+import br.usjt.domain.services.GenreService;
+import br.usjt.domain.services.UserService;
 import br.usjt.ui.BaseUi;
 import br.usjt.ui.UiHandler;
 
@@ -27,10 +27,10 @@ public class GenresUi extends BaseUi {
     private JComboBox<Genre> genreOptions;
     private JTable dataTable;
     private JScrollPane scroolPanel;
-    private GenreInteractors genreInteractor;
-    private UserInteractors userInteractor;
+    private GenreService genreInteractor;
+    private UserService userInteractor;
 
-    public GenresUi(GenreInteractors genreInteractor, UserInteractors userInteractor, Boolean visible,
+    public GenresUi(GenreService genreInteractor, UserService userInteractor, Boolean visible,
             UiHandler handler) {
         this.handler = handler;
         this.genreInteractor = genreInteractor;

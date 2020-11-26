@@ -3,7 +3,7 @@ package br.usjt.ui.screens;
 import javax.swing.*;
 
 import br.usjt.domain.entity.User;
-import br.usjt.domain.interactor.UserInteractors;
+import br.usjt.domain.services.UserService;
 import br.usjt.ui.BaseUi;
 import br.usjt.ui.UiHandler;
 
@@ -16,10 +16,10 @@ public class LoginUi extends BaseUi {
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registerButton;
-    private UserInteractors interactor;
+    private UserService interactor;
     private UiHandler handler;
 
-    public LoginUi(UserInteractors interactor, Boolean visible, UiHandler handler) {
+    public LoginUi(UserService interactor, Boolean visible, UiHandler handler) {
         this.interactor = interactor;
         this.handler = handler;
         this.startUserLabel();

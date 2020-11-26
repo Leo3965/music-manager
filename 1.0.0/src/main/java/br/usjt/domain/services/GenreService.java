@@ -1,15 +1,15 @@
-package br.usjt.domain.interactor;
+package br.usjt.domain.services;
 
 import br.usjt.domain.contracts.repositories.GenreRepository;
 import br.usjt.domain.entity.Genre;
 import br.usjt.domain.entity.User;
 import java.util.List;
 
-public class GenreInteractors {
+public class GenreService {
 
     private GenreRepository genreRepository;
 
-    public GenreInteractors(GenreRepository genreRepository) {
+    public GenreService(GenreRepository genreRepository) {
         this.genreRepository = genreRepository;
     }
 

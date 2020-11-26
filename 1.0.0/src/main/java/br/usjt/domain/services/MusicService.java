@@ -1,9 +1,9 @@
-package br.usjt.domain.interactor;
+package br.usjt.domain.services;
 
 import br.usjt.domain.contracts.repositories.BaseRepository;
 import br.usjt.domain.entity.Music;
 
-public class MusicInteractors {
+public class MusicService {
     private BaseRepository<Music> musicRepository;
 
 }

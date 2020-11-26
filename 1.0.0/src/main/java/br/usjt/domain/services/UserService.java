@@ -1,4 +1,4 @@
-package br.usjt.domain.interactor;
+package br.usjt.domain.services;
 
 import java.util.List;
 
@@ -7,11 +7,11 @@ import br.usjt.domain.contracts.repositories.UserRepository;
 import br.usjt.domain.entity.Genre;
 import br.usjt.domain.entity.User;
 
-public class UserInteractors {
+public class UserService {
     private UserRepository userRepository;
     private Hash hashDriver;
 
-    public UserInteractors(UserRepository userRepository, Hash hashDriver) {
+    public UserService(UserRepository userRepository, Hash hashDriver) {
         this.userRepository = userRepository;
         this.hashDriver = hashDriver;
     }
