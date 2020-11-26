@@ -14,28 +14,25 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JInternalFrame.JDesktopIcon;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 public class GenresUi extends BaseUi {
 
-    private UiHandler handler;
+    private UiHandler uiHandler;
     private JButton addButton;
     private JComboBox<Genre> genreOptions;
     private JTable dataTable;
     private JScrollPane scroolPanel;
-    private GenreService genreInteractor;
-    private UserService userInteractor;
+    private GenreService genreService;
+    private UserService userService;
 
-    public GenresUi(GenreService genreInteractor, UserService userInteractor, Boolean visible, UiHandler handler) {
-        this.handler = handler;
-        this.genreInteractor = genreInteractor;
-        this.userInteractor = userInteractor;
+    public GenresUi(GenreService genreService, UserService userService, Boolean visible, UiHandler uiHandler) {
+        this.uiHandler = uiHandler;
+        this.genreService = genreService;
+        this.userService = userService;
         this.startAddButton();
         this.startDataTable();
         this.startGenreComboBox();
@@ -53,7 +50,7 @@ public class GenresUi extends BaseUi {
         this.genreOptions = new JComboBox<>();
         this.genreOptions.setBounds(20, 340, 360, 30);
 
-        for (Genre genre : this.genreInteractor.getAll()) {
+        for (Genre genre : this.genreService.getAll()) {
             this.genreOptions.addItem(genre);
         }
     }
@@ -68,19 +65,22 @@ public class GenresUi extends BaseUi {
     }
 
     private void load() {
-        User user = handler.getUser();
+        User user = uiHandler.getUser();
         DefaultTableModel model = (DefaultTableModel) this.dataTable.getModel();
         model.setRowCount(0);
-        for (Genre genre : this.genreInteractor.getGenresByUser(user)) {
+        for (Genre genre : this.genreService.getGenresByUser(user)) {
             model.addRow(new Object[] { genre.getName(), genre.getId(), "Delete" });
         }
 
         Action delete = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                /*JTable table = (JTable) e.getSource();
+                JTable table = (JTable) e.getSource();
                 int modelRow = Integer.valueOf(e.getActionCommand());
-                ((DefaultTableModel) table.getModel()).removeRow(modelRow);*/
-                JOptionPane.showMessageDialog(null, "Delete");
+                DefaultTableModel model = ((DefaultTableModel) table.getModel());//.removeRow(modelRow);
+                String genreName = (String) model.getDataVector().get(modelRow).get(0);
+                Genre genre = genreService.getByKey("name", genreName).get(0);
+                userService.removeFavoriteGenre(uiHandler.getUser(), genre);
+                model.removeRow(modelRow);
             }
         };
 
@@ -98,8 +98,8 @@ public class GenresUi extends BaseUi {
                 Genre genre = (Genre) genreOptions.getSelectedItem();
 
                 if (genre != null) {
-                    User user = handler.getUser();
-                    userInteractor.addFavoriteGenre(user, genre);
+                    User user = uiHandler.getUser();
+                    userService.addFavoriteGenre(user, genre);
                     load();
                 }
 
@@ -121,7 +121,7 @@ public class GenresUi extends BaseUi {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent windowEvent) {
-                handler.showWindow("dashboard");
+                uiHandler.showWindow("dashboard");
             }
         });
 

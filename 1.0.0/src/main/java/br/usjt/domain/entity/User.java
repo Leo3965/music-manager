@@ -1,6 +1,7 @@
 package br.usjt.domain.entity;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import br.usjt.domain.contracts.Hash;
@@ -61,4 +62,18 @@ public class User {
             this.avaliations.add(avaliation);
         }
     }
+
+	public void removeGenre(Genre genre) {
+        Genre genreToBeExcluded = new Genre(0, "");
+        Iterator<Genre> genreInteractor = this.genres.iterator();
+
+        while(genreInteractor.hasNext()) {
+            Genre genrePersisted = genreInteractor.next();
+            if(genrePersisted.getId() == genre.getId()) {
+                genreToBeExcluded = genrePersisted;
+            }
+        }
+
+        this.genres.remove(genreToBeExcluded);
+	}
 }

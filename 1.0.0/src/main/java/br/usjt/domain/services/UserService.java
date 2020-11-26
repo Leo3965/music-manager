@@ -34,4 +34,9 @@ public class UserService {
         user.addGenre(genre);
         this.userRepository.update(user);
     }
+
+	public void removeFavoriteGenre(User user, Genre genre) {
+        user.removeGenre(genre);
+        this.userRepository.update(user);
+	}
 }
