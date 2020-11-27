@@ -10,7 +10,7 @@ import br.usjt.entity.Avaliation;
 import br.usjt.entity.Genre;
 import br.usjt.entity.User;
 import br.usjt.interfaces.repositories.UserRepository;
-import br.usjt.drivers.MysqlDriver;
+import br.usjt.services.MysqlDriver;
 
 public class UserRepositoryImpl implements UserRepository {
 

@@ -1,6 +1,6 @@
-package br.usjt.factories.drivers;
+package br.usjt.factories.services;
 
-import br.usjt.drivers.HashDriverImpl;
+import br.usjt.services.HashDriverImpl;
 import br.usjt.interfaces.Hash;
 
 public class HashDriverFactory {

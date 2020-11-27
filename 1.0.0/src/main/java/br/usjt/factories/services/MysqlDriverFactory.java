@@ -1,6 +1,6 @@
-package br.usjt.factories.drivers;
+package br.usjt.factories.services;
 
-import br.usjt.drivers.MysqlDriver;
+import br.usjt.services.MysqlDriver;
 
 public class MysqlDriverFactory {
     public static MysqlDriver get() {

@@ -9,7 +9,7 @@ import java.util.List;
 import br.usjt.entity.Genre;
 import br.usjt.entity.User;
 import br.usjt.interfaces.repositories.GenreRepository;
-import br.usjt.drivers.MysqlDriver;
+import br.usjt.services.MysqlDriver;
 
 public class GenreRepositoryImpl implements GenreRepository {
 

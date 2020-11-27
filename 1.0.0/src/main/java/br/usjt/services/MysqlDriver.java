@@ -1,4 +1,4 @@
-package br.usjt.drivers;
+package br.usjt.services;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
