@@ -2,7 +2,7 @@ package br.usjt.ui.screens;
 
 import javax.swing.*;
 
-import br.usjt.domain.services.UserService;
+import br.usjt.services.UserService;
 import br.usjt.ui.BaseUi;
 import br.usjt.ui.UiHandler;
 
@@ -17,11 +17,11 @@ public class RegisterUi extends BaseUi {
     private JLabel passwordLabel;
     private JPasswordField passwordField;
     private JButton loginButton;
-    private UserService interactor;
+    private UserService userService;
     private UiHandler handler;
 
     public RegisterUi(UserService interactor, Boolean visible, UiHandler handler) {
-        this.interactor = interactor;
+        this.userService = interactor;
         this.handler = handler;
         this.startEmailLabel();
         this.startEmailField();
@@ -101,7 +101,7 @@ public class RegisterUi extends BaseUi {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha os campos");
                 } else {
                     try {
-                        interactor.create(name, email, password);
+                        userService.create(name, email, password);
                         JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
                         emailField.setText("");
                         passwordField.setText("");

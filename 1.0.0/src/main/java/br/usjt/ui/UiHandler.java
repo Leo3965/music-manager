@@ -1,10 +1,10 @@
 package br.usjt.ui;
 
 import java.util.HashMap;
-import br.usjt.domain.entity.User;
-import br.usjt.domain.services.UserService;
-import br.usjt.factories.domain.GenreServiceFactory;
-import br.usjt.factories.domain.UserServiceFactory;
+import br.usjt.entity.User;
+import br.usjt.services.UserService;
+import br.usjt.factories.services.GenreServiceFactory;
+import br.usjt.factories.services.UserServiceFactory;
 import br.usjt.ui.screens.*;
 
 public class UiHandler {

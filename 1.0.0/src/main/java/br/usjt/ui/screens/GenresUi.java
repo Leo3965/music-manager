@@ -1,12 +1,12 @@
 package br.usjt.ui.screens;
 
-import br.usjt.domain.entity.Genre;
-import br.usjt.domain.entity.User;
-import br.usjt.domain.services.GenreService;
-import br.usjt.domain.services.UserService;
+import br.usjt.entity.Genre;
+import br.usjt.entity.User;
+import br.usjt.services.GenreService;
+import br.usjt.services.UserService;
 import br.usjt.ui.BaseUi;
 import br.usjt.ui.UiHandler;
-import br.usjt.utils.ButtonColumn;
+import br.usjt.ui.utils.ButtonColumn;
 
 import java.awt.event.*;
 
@@ -42,13 +42,13 @@ public class GenresUi extends BaseUi {
 
     private void startScroolPanel() {
         this.scroolPanel = new JScrollPane(this.dataTable);
-        this.scroolPanel.setBounds(20, 20, 360, 300);
+        this.scroolPanel.setBounds(20, 20, 460, 300);
         this.scroolPanel.setVisible(true);
     }
 
     private void startGenreComboBox() {
         this.genreOptions = new JComboBox<>();
-        this.genreOptions.setBounds(20, 340, 360, 30);
+        this.genreOptions.setBounds(20, 340, 460, 30);
 
         for (Genre genre : this.genreService.getAll()) {
             this.genreOptions.addItem(genre);
@@ -69,7 +69,7 @@ public class GenresUi extends BaseUi {
         DefaultTableModel model = (DefaultTableModel) this.dataTable.getModel();
         model.setRowCount(0);
         for (Genre genre : this.genreService.getGenresByUser(user)) {
-            model.addRow(new Object[] { genre.getName(), genre.getId(), "Delete" });
+            model.addRow(new Object[] { genre.getName(), genre.getDate(), "Delete" });
         }
 
         Action delete = new AbstractAction() {
@@ -90,7 +90,7 @@ public class GenresUi extends BaseUi {
 
     private void startAddButton() {
         this.addButton = new JButton("Adicionar");
-        this.addButton.setBounds(20, 390, 360, 30);
+        this.addButton.setBounds(20, 390, 460, 30);
 
         this.addButton.addActionListener(new ActionListener() {
             @Override
@@ -110,7 +110,7 @@ public class GenresUi extends BaseUi {
     @Override
     protected void startMainFrame(Boolean visible) {
         this.setTitle("Meus gêneros preferidos");
-        this.setSize(400, 490);
+        this.setSize(500, 490);
         this.setVisible(visible);
         this.add(this.scroolPanel);
         this.centralize();

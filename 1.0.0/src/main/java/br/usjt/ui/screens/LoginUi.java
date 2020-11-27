@@ -2,8 +2,8 @@ package br.usjt.ui.screens;
 
 import javax.swing.*;
 
-import br.usjt.domain.entity.User;
-import br.usjt.domain.services.UserService;
+import br.usjt.entity.User;
+import br.usjt.services.UserService;
 import br.usjt.ui.BaseUi;
 import br.usjt.ui.UiHandler;
 
