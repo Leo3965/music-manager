@@ -11,11 +11,11 @@ public class UiHandler {
     private String userEmail;
 
     private HashMap<String, BaseUi> screens;
-    private UserService userInteractor;
+    private UserService userService;
 
     public UiHandler(UserService userInteractor) {
         this.screens = new HashMap<String, BaseUi>();
-        this.userInteractor = userInteractor;
+        this.userService = userInteractor;
         startWindows();
     }
 
@@ -24,7 +24,7 @@ public class UiHandler {
     }
 
     public User getUser() {
-        return this.userInteractor.getUserByEmail(this.userEmail);
+        return this.userService.getUserByEmail(this.userEmail);
     }
 
     private void startWindows() {

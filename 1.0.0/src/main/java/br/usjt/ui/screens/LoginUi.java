@@ -16,11 +16,11 @@ public class LoginUi extends BaseUi {
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registerButton;
-    private UserService interactor;
+    private UserService userService;
     private UiHandler handler;
 
     public LoginUi(UserService interactor, Boolean visible, UiHandler handler) {
-        this.interactor = interactor;
+        this.userService = interactor;
         this.handler = handler;
         this.startUserLabel();
         this.startUserField();
@@ -86,8 +86,8 @@ public class LoginUi extends BaseUi {
 
                 if (username.equals("") || password.equals("")) {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha os campos");
-                } else if (interactor.authenticate(username, password)) {
-                    User user = interactor.getUserByEmail(username);
+                } else if (userService.authenticate(username, password)) {
+                    User user = userService.getUserByEmail(username);
                     handler.setUser(user);
                     handler.showWindow("dashboard");
                 } else {
