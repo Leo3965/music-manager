@@ -110,7 +110,7 @@ public class GenresUi extends BaseUi {
     @Override
     protected void startMainFrame(Boolean visible) {
         this.setTitle("Meus gêneros preferidos");
-        this.setSize(500, 490);
+        this.setSize(520, 490);
         this.setVisible(visible);
         this.add(this.scroolPanel);
         this.centralize();

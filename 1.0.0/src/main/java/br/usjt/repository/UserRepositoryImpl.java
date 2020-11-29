@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
 import br.usjt.entity.Avaliation;
 import br.usjt.entity.Genre;
 import br.usjt.entity.User;
@@ -112,11 +111,21 @@ public class UserRepositoryImpl implements UserRepository {
             psUpdateUser.setInt(4, user.getId());
             psUpdateUser.execute();
 
-            String sqlDeleteGenre = "DELETE FROM user_genres where userId = ?";
+            List<String> genreIds = new ArrayList<String>();
+
+            for(Genre genre: user.getGenres()) {
+                genreIds.add(genre.getId().toString());
+            }
+
+            String sqlDeleteGenre = String.format(
+                "DELETE FROM user_genres where userId = ? and genreId not in (%s)", 
+                genreIds.size() > 0 ? String.join(",", genreIds) : "-1"
+            );
 
             try (PreparedStatement psDeleteGenre = conn.prepareStatement(sqlDeleteGenre)) {
                 psDeleteGenre.setInt(1, user.getId());
                 psDeleteGenre.execute();
+                
                 for (Genre genre : user.getGenres()) {
                     String sqlInsertGenre = "INSERT INTO user_genres (genreId, userId) values (?, ?)";
 
@@ -125,18 +134,27 @@ public class UserRepositoryImpl implements UserRepository {
                         psInsertGenre.setInt(2, user.getId());
                         psInsertGenre.execute();
                     } catch (Exception e) {
-                        e.printStackTrace();
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            String sqlDeleteAvaliation = "DELETE FROM avaliations where userId = ?";
+            List<String> avaliationsIds = new ArrayList<String>();
+
+            for(Avaliation avaliation: user.getAvaliations()) {
+                avaliationsIds.add(avaliation.getId().toString());
+            }
+
+            String sqlDeleteAvaliation = String.format(
+                "DELETE FROM avaliations where userId = ? and id not in (%s)",
+                avaliationsIds.size() > 0 ? String.join(",", avaliationsIds) : "-1"
+            );
 
             try (PreparedStatement psDeleteAvaliation = conn.prepareStatement(sqlDeleteAvaliation)) {
                 psDeleteAvaliation.setInt(1, user.getId());
                 psDeleteAvaliation.execute();
+
                 for(Avaliation avaliation : user.getAvaliations()) {
                     String sqlInsertAvaliation = "INSERT INTO avaliations (score, musicId, userId) values (?, ?, ?)";
 
@@ -145,7 +163,6 @@ public class UserRepositoryImpl implements UserRepository {
                         psInsertAvaliation.setInt(2, avaliation.getMusic().getId());
                         psInsertAvaliation.setInt(3, user.getId());
                     } catch (Exception e) {
-                        e.printStackTrace();
                     }
                 }
             } catch (Exception e) {

@@ -67,7 +67,7 @@ public class DashboardUi extends BaseUi {
         this.add(this.myGenresButton);
         this.add(this.scoreMusicButton);
         this.add(this.getRecommendationButton);
-        this.setSize(400, 200);
+        this.setSize(420, 200);
         this.setLayout(null);
         this.setVisible(visible);
         this.centralize();
