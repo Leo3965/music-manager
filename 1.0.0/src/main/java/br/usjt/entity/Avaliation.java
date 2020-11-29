@@ -13,4 +13,10 @@ public class Avaliation {
         this.id = id;
         this.score = score;
     }
+
+    public Avaliation(Short score, User user, Music music) {
+        this.score = score;
+        this.user = user;
+        this.music = music;
+    }
 }

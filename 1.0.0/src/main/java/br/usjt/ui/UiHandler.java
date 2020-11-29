@@ -4,6 +4,7 @@ import java.util.HashMap;
 import br.usjt.entity.User;
 import br.usjt.services.UserService;
 import br.usjt.factories.services.GenreServiceFactory;
+import br.usjt.factories.services.MusicServiceFactory;
 import br.usjt.factories.services.UserServiceFactory;
 import br.usjt.ui.screens.*;
 
@@ -33,6 +34,7 @@ public class UiHandler {
         this.screens.put("dashboard", new DashboardUi(false, this));
         this.screens.put("genres",
                 new GenresUi(GenreServiceFactory.get(), UserServiceFactory.get(), false, this));
+        this.screens.put("avaliations", new AvaliationsUi(false, this, MusicServiceFactory.get()));
 
         this.showWindow("login");
     }

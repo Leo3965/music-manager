@@ -45,7 +45,7 @@ public class DashboardUi extends BaseUi {
         this.scoreMusicButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "musicScore");
+                handler.showWindow("avaliations");
             }
         });
     }
