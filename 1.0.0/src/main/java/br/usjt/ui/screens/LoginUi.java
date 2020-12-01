@@ -88,6 +88,8 @@ public class LoginUi extends BaseUi {
                     JOptionPane.showMessageDialog(null, "Por favor, preencha os campos");
                 } else if (userService.authenticate(username, password)) {
                     User user = userService.getUserByEmail(username);
+                    emailField.setText("");
+                    passwordField.setText("");
                     handler.setUser(user);
                     handler.showWindow("dashboard");
                 } else {

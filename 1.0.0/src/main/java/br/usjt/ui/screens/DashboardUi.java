@@ -12,6 +12,7 @@ public class DashboardUi extends BaseUi {
     private JButton myGenresButton;
     private JButton scoreMusicButton;
     private JButton getRecommendationButton;
+    private JButton logoffButton;
     private UiHandler handler;
 
     public DashboardUi(Boolean visible, UiHandler handler) {
@@ -24,6 +25,20 @@ public class DashboardUi extends BaseUi {
         startGenresButton();
         startMusicButton();
         startRecommendationButton();
+        startLogoffButton();
+    }
+
+    private void startLogoffButton() {
+        this.logoffButton = new JButton("Logoff");
+        this.logoffButton.setBounds(20, 155, 360, 30);
+
+        this.logoffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handler.Logoff();
+                handler.showWindow("login");
+            }
+        });
     }
 
     private void startRecommendationButton() {
@@ -67,7 +82,8 @@ public class DashboardUi extends BaseUi {
         this.add(this.myGenresButton);
         this.add(this.scoreMusicButton);
         this.add(this.getRecommendationButton);
-        this.setSize(420, 200);
+        this.add(this.logoffButton);
+        this.setSize(420, 250);
         this.setLayout(null);
         this.setVisible(visible);
         this.centralize();

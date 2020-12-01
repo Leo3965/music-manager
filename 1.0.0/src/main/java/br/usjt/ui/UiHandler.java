@@ -28,6 +28,10 @@ public class UiHandler {
         return this.userService.getUserByEmail(this.userEmail);
     }
 
+    public void Logoff() {
+        this.userEmail = null;
+    }
+
     private void startWindows() {
         this.screens.put("login", new LoginUi(UserServiceFactory.get(), false, this));
         this.screens.put("register", new RegisterUi(UserServiceFactory.get(), false, this));
