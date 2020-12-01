@@ -2,15 +2,10 @@ package br.usjt.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
 import br.usjt.entity.Avaliation;
-import br.usjt.entity.Genre;
-import br.usjt.entity.Music;
 import br.usjt.interfaces.repositories.AvaliationRepository;
-import br.usjt.interfaces.repositories.MusicRepository;
 import br.usjt.services.MysqlDriver;
 
 public class AvaliationRepositoryImpl implements AvaliationRepository {
