@@ -15,13 +15,18 @@ public class UserService {
     }
 
     public void create(String name, String email, String password) {
-        User user = User.fromRaw(name, email, this.hashDriver.hash(password));
+        User user = new User(name, email, this.hashDriver.hash(password));
         this.userRepository.create(user);
     }
 
     public boolean authenticate(String email, String password) {
-        User user = this.getUserByEmail(email);
-        return user.authenticate(password, this.hashDriver);
+        try {
+            User user = this.getUserByEmail(email);
+            return user.authenticate(password, this.hashDriver);
+        } 
+        catch (Exception e) {
+            return false;
+        }
     }
 
     public User getUserByEmail(String email) {

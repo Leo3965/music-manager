@@ -32,7 +32,7 @@ public class LoginUi extends BaseUi {
     }
 
     private void startRegisterButton() {
-        this.registerButton = new JButton("Register");
+        this.registerButton = new JButton("Registrar");
         this.registerButton.setBounds(10, 155, 200, 30);
 
         this.registerButton.addActionListener(new ActionListener() {
@@ -54,7 +54,7 @@ public class LoginUi extends BaseUi {
     }
 
     protected void startMainFrame(Boolean visible) {
-        this.setTitle("System Login");
+        this.setTitle("Login");
         this.add(this.emailLabel);
         this.add(this.emailField);
         this.add(this.passwordLabel);
@@ -75,7 +75,7 @@ public class LoginUi extends BaseUi {
     }
 
     private void startLoginButton() {
-        this.loginButton = new JButton("Login");
+        this.loginButton = new JButton("Logar");
         this.loginButton.setBounds(10, 120, 200, 30);
 
         this.loginButton.addActionListener(new ActionListener() {

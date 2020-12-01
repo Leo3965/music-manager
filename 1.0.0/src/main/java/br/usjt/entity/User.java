@@ -31,8 +31,12 @@ public class User {
         this.genres = new ArrayList<Genre>();
     }
 
-    public static User fromRaw(String name, String email, String password) {
-        return new User(-1, name, password, email);
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.avaliations = new ArrayList<Avaliation>();
+        this.genres = new ArrayList<Genre>();
     }
 
     public void addGenre(Genre genre) {

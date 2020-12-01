@@ -95,7 +95,7 @@ public class AvaliationsUi extends BaseUi {
         this.add(this.scroolPanel);
         this.add(this.saveButton);
         this.add(this.errorLabel);
-        this.setSize(520, 490);
+        this.setSize(520, 470);
         this.setLayout(null);
         this.setVisible(visible);
         this.centralize();
