@@ -111,6 +111,7 @@ public class GenresUi extends BaseUi {
     protected void startMainFrame(Boolean visible) {
         this.setTitle("Meus gêneros preferidos");
         this.setSize(520, 490);
+        this.setResizable(false);
         this.setVisible(visible);
         this.add(this.scroolPanel);
         this.centralize();

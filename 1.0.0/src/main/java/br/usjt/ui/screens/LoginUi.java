@@ -62,6 +62,7 @@ public class LoginUi extends BaseUi {
         this.add(this.registerButton);
         this.add(this.loginButton);
         this.setSize(240, 230);
+        this.setResizable(false);
         this.setLayout(null);
         this.setVisible(visible);
         this.centralize();

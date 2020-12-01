@@ -68,6 +68,7 @@ public class RecommedationUI extends BaseUi {
         this.add(this.scroolPanel);
         this.add(this.returnButton);
         this.setSize(520, 430);
+        this.setResizable(false);
         this.setLayout(null);
         this.setVisible(visible);
         this.centralize();

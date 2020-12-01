@@ -84,6 +84,7 @@ public class DashboardUi extends BaseUi {
         this.add(this.getRecommendationButton);
         this.add(this.logoffButton);
         this.setSize(420, 250);
+        this.setResizable(false);
         this.setLayout(null);
         this.setVisible(visible);
         this.centralize();

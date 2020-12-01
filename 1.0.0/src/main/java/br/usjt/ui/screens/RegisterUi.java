@@ -73,6 +73,7 @@ public class RegisterUi extends BaseUi {
         this.add(this.nameField);
         this.add(this.nameLabel);
         this.setSize(240, 250);
+        this.setResizable(false);
         this.setLayout(null);
         this.setVisible(visible);
         this.centralize();
