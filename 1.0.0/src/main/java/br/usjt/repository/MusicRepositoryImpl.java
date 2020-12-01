@@ -95,5 +95,35 @@ public class MusicRepositoryImpl implements MusicRepository {
             return new ArrayList<Music>();
         }
     }
+
+    @Override
+    public List<Music> getMusicsWithScore(User user) {
+        String sql = "select distinct(music.id), music.name, avg(avaliations.score) as score from user_genres "
+        +"inner join genres on user_genres.genreId = genres.id"
+        +"inner join music_genres on music_genres.genreId = genres.id"
+        +"inner join music on music_genres.musicId = music.id"
+        +"left join avaliations on music.id = avaliations.musicId"
+        +"where (user_genres.userId = (?) and !(select count(id) > 0 from avaliations where avaliations.userId = (?) and avaliations.musicId = music.id))"
+        +"group by music.id"
+        +"order by score desc";
+
+        try (Connection conn = this.driver.getConnection(); PreparedStatement psQueryUser = conn.prepareStatement(sql);) {
+            psQueryUser.setInt(1, user.getId());
+            psQueryUser.setInt(2, user.getId());
+            ResultSet rs = psQueryUser.executeQuery();
+            List<Music> musics = new ArrayList<Music>();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                double score = rs.getDouble("score");
+                Music music = new Music(id, name, score);
+                musics.add(music);
+            }
+            return musics;
+        } catch (Exception e) {
+            return new ArrayList<Music>();
+        }
+    }
     
 }

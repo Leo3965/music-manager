@@ -9,4 +9,5 @@ import br.usjt.entity.User;
 public interface MusicRepository extends BaseRepository<Music> {
 	List<Music> getByGenre(Genre genre);
 	public List<Music> getMusicForAvaliations(Genre genre, User user);
+	List<Music> getMusicsWithScore(User user);
 }

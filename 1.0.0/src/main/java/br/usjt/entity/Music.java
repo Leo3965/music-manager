@@ -11,6 +11,7 @@ public class Music {
     private String name;
     private List<Genre> genres;
     private List<Avaliation> avaliations;
+    private double score;
 
     public Music(Integer id, String name) {
         this.id = id;
@@ -18,6 +19,14 @@ public class Music {
         this.genres = new ArrayList<Genre>();
         this.avaliations = new ArrayList<Avaliation>();
     }
+
+    public Music(Integer id, String name, double score) {
+        this.id = id;
+        this.score = score;
+        this.name = name;
+        this.genres = new ArrayList<Genre>();
+        this.avaliations = new ArrayList<Avaliation>();
+    }    
     
     public void addGenre(Genre genre) {
         this.genres.add(genre);

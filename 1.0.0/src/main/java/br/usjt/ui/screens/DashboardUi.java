@@ -33,7 +33,7 @@ public class DashboardUi extends BaseUi {
         this.getRecommendationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "recomendation");
+                handler.showWindow("recommendations");
             }
         });
     }

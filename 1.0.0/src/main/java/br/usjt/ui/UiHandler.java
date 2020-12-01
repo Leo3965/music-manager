@@ -35,6 +35,7 @@ public class UiHandler {
         this.screens.put("genres",
                 new GenresUi(GenreServiceFactory.get(), UserServiceFactory.get(), false, this));
         this.screens.put("avaliations", new AvaliationsUi(false, this, MusicServiceFactory.get()));
+        this.screens.put("recommendations", new RecommedationUI(false, this, MusicServiceFactory.get()));
 
         this.showWindow("login");
     }

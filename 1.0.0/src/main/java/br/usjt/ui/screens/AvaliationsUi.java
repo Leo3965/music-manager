@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,6 +24,7 @@ public class AvaliationsUi extends BaseUi {
     private JTable dataTable;
     private JScrollPane scroolPanel;
     private JButton saveButton;
+    private JLabel errorLabel;
 
     public AvaliationsUi(Boolean visible, UiHandler handler, MusicService musicService) {
         this.handler = handler;
@@ -35,7 +37,9 @@ public class AvaliationsUi extends BaseUi {
 
     private void startSaveButton() {
         this.saveButton = new JButton("Confirmar Avaliações");
+        this.errorLabel = new JLabel("Avaliações entre 1 e 5. 0 para não avaliar");
         this.saveButton.setBounds(20, 340, 460, 30);
+        this.errorLabel.setBounds(20, 390, 460, 30);
 
         this.saveButton.addActionListener(new ActionListener() {
             @Override
@@ -49,7 +53,11 @@ public class AvaliationsUi extends BaseUi {
                     String musicName = (String) element.get(0);
                     String musicScore = (String) element.get(1);
 
-                    musicService.addAvaliation(musicName, Short.valueOf(musicScore), handler.getUser());
+                    try {  
+                        musicService.addAvaliation(musicName, Short.valueOf(musicScore), handler.getUser());
+                    } catch (Exception f) {
+                        JOptionPane.showMessageDialog(null, "Entrada inválida");
+                    }
                 }
 
                 JOptionPane.showMessageDialog(null, "Avaliações cadastradas com sucesso");
@@ -86,6 +94,7 @@ public class AvaliationsUi extends BaseUi {
         this.setTitle("Avaliar Músicas");
         this.add(this.scroolPanel);
         this.add(this.saveButton);
+        this.add(this.errorLabel);
         this.setSize(520, 490);
         this.setLayout(null);
         this.setVisible(visible);

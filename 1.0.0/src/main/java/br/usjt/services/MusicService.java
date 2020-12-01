@@ -41,9 +41,22 @@ public class MusicService {
         return musics;
     }
 
-	public void addAvaliation(String musicName, Short score, User user) {
+	public void addAvaliation(String musicName, Short score, User user) throws Exception{
+
+        if(score == 0){
+            return;
+        } else if (score > 5 || score < 0){
+            throw new Exception("Entrada inválida");
+        }
+
+
+
         Music music = this.musicRepository.getByKey("name", musicName).get(0);
         Avaliation avaliation = new Avaliation(score, user, music);
         this.avaliationRepository.create(avaliation);
-	}
+    }
+    
+    public List<Music> getMusicsWithScore(User user){
+        return musicRepository.getMusicsWithScore(user);
+    }
 }
