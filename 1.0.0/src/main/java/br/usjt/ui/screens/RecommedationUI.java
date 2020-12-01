@@ -64,12 +64,10 @@ public class RecommedationUI extends BaseUi {
 
         DefaultTableModel model = (DefaultTableModel) this.dataTable.getModel();
         model.setRowCount(0);
-        List<Music> musics = musicService.getMusicForAvaliations(handler.getUser());
+        List<Music> musics = this.musicService.getMusicsWithScore(handler.getUser());
         for (Music music : musics) {
             model.addRow(new Object[] { music.getName(), music.getScore() });
         }
-        ;
-
     }
 
     @Override

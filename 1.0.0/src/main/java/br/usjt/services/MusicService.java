@@ -57,6 +57,6 @@ public class MusicService {
     }
     
     public List<Music> getMusicsWithScore(User user){
-        return musicRepository.getMusicsWithScore(user);
+        return this.musicRepository.getMusicsWithScore(user);
     }
 }

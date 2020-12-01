@@ -99,12 +99,12 @@ public class MusicRepositoryImpl implements MusicRepository {
     @Override
     public List<Music> getMusicsWithScore(User user) {
         String sql = "select distinct(music.id), music.name, avg(avaliations.score) as score from user_genres "
-        +"inner join genres on user_genres.genreId = genres.id"
-        +"inner join music_genres on music_genres.genreId = genres.id"
-        +"inner join music on music_genres.musicId = music.id"
-        +"left join avaliations on music.id = avaliations.musicId"
-        +"where (user_genres.userId = (?) and !(select count(id) > 0 from avaliations where avaliations.userId = (?) and avaliations.musicId = music.id))"
-        +"group by music.id"
+        +"inner join genres on user_genres.genreId = genres.id "
+        +"inner join music_genres on music_genres.genreId = genres.id "
+        +"inner join music on music_genres.musicId = music.id "
+        +"left join avaliations on music.id = avaliations.musicId "
+        +"where (user_genres.userId = (?) and !(select count(id) > 0 from avaliations where avaliations.userId = (?) and avaliations.musicId = music.id)) "
+        +"group by music.id "
         +"order by score desc";
 
         try (Connection conn = this.driver.getConnection(); PreparedStatement psQueryUser = conn.prepareStatement(sql);) {
